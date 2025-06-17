@@ -143,6 +143,9 @@ class LightsaberModel:
     def train_model(self):
         self.lightsaber_detector.train_loop(self.num_epochs)
 
+    def load_model(self):
+        self.lightsaber_detector.load_model()
+
     def view_predictions(self, frames_to_view):
         if frames_to_view > len(self.all_dataset):
             frames_to_view = len(self.all_dataset)
@@ -265,7 +268,7 @@ class LightsaberDetector:
         axs[0].title.set_text('Original photo')
         #axs[1].imshow(frame_true_label_plt, cmap='gray')
         axs[1].imshow(final_pred_show)
-        axs[1].title.set_text('Predicted pixel labels(white=lightsaber, black=not lightsaber)')
+        axs[1].title.set_text('Predicted pixel labels(white=lightsaber, black=not lightsaber, \ngreen=false lightsaber, blue=false not lightsaber)')
         plt.tight_layout()
         plt.show()
         
@@ -366,6 +369,9 @@ class LightsaberDetector:
                 #save best model
                 torch.save(self.model.state_dict(), self.path_to_model_savefile)
         #loading best model
+        self.model.load_state_dict(torch.load(self.path_to_model_savefile))
+
+    def load_model(self):
         self.model.load_state_dict(torch.load(self.path_to_model_savefile))
             
 def flip_duplicate_dataset(all_dataset, all_dataset_labels):

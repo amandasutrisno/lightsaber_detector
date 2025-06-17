@@ -17,8 +17,8 @@ if __name__ == "__main__":
     model_params['lr'] = 5e-5
     model_params['path_to_model_savefile'] = 'output/best_lightsaber_model.pkl'
 
-    path_to_frames = 'data/training_test_data/duel_frames_only.pkl'
-    path_to_frame_labels = 'data/training_test_data/duel_frames_pixel_labels.pkl'
+    path_to_frames = 'data/duel_video_only/duel_frames_only.pkl'
+    path_to_frame_labels = 'data/duel_video_labels/duel_frames_pixel_labels.pkl'
 
     lightsaber_model = LightsaberModel(path_to_frames, path_to_frame_labels, crop_params, model_params)
     lightsaber_model.train_model()
