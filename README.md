@@ -57,11 +57,21 @@ This script uses bounding box annotations stored in:
 data/raw_video_labels/duel_frames_labels_0_to_60.csv
 ```
 
-It generates pixel-level labels for lightsabers based on the defined quadrilateral regions.
+It generates pixel-level labels for lightsabers based on defined quadrilateral regions for each lightsaber(2 per frame).
 
 ---
 
-### Step 3: Visualize Model Predictions
+### Step 3: Train Model
+
+```bash
+python MAIN_test_model_trainer.py
+```
+
+This trains the uNet model on the pixel-level labels.
+
+---
+
+### Step 4: Visualize Model Predictions
 
 ```bash
 python MAIN_run_trained_model.py
@@ -112,9 +122,11 @@ Due to class imbalance (very few lightsaber pixels vs. background), lightsaber p
 
 ## Requirements
 
+please see requirements.txt file
 - Python 3.8+
 - PyTorch
 - OpenCV
+- Pandas
 - NumPy
 - Matplotlib
 
@@ -124,23 +136,15 @@ Install dependencies with:
 pip install -r requirements.txt
 ```
 
-_(or create an environment using `environment.yml` if available)_
-
----
-
-## License
-
-This project is released under the MIT License. See `LICENSE` for more details.
-
 ---
 
 ## TODO
 
-- [ ] Implement pose detection integration (OpenPose)
-- [ ] Add real-time inference pipeline
-- [ ] Improve labeling accuracy with custom annotation tool
-- [ ] Experiment with data augmentation (brightness, motion blur)
-- [ ] Publish pretrained model weights
+- [ ] Implement pose detection integration (OpenPose).
+- [ ] Develop algorithm to get 3d space coordinates per lightsaber from multi-camera lightsaber pixel detection.
+- [ ] Develop hit detection algorithm from 3d space coordinates per lightsaber and 3d pose detection data.
+- [ ] Experiment with a variety of lighting/camera conditions(brightness, motion blur, different clothing color, etc.).
+- [ ] Implement real-time hit-detection.
 
 ---
 
